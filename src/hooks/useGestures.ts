@@ -32,6 +32,7 @@ export const useGestures = ({
   onPinchEnd,
   onPanStart,
   onPanEnd,
+  onTap,
 }: ImageZoomUseGesturesProps) => {
   const isInteracting = useRef(false);
   const isPanning = useRef(false);
@@ -133,6 +134,15 @@ export const useGestures = ({
       runOnJS(onPinchEnded)();
     });
 
+    const onTapStarted = () => {
+      onTap?.();
+    };
+
+    const tapGesture = Gesture.Tap()
+      .onStart(() => {
+        runOnJS(onTapStarted)();
+      });
+
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
       { translateX: translate.x.value },
@@ -143,7 +153,7 @@ export const useGestures = ({
     ],
   }));
 
-  const gestures = Gesture.Simultaneous(pinchGesture, panGesture);
+  const gestures = Gesture.Simultaneous(pinchGesture, panGesture, tapGesture);
 
   return { gestures, animatedStyle };
 };

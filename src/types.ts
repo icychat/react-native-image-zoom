@@ -60,6 +60,12 @@ export type ImageZoomProps = Omit<ImageProps, 'source'> & {
    * A callback triggered when the image panning ends.
    */
   onPanEnd?: Function;
+
+   /**
+   * A callback triggered when the image panning ends.
+   */
+   onTap?: Function;
+
   /**
    * @see https://facebook.github.io/react-native/docs/image.html#source
    * @default undefined
@@ -100,4 +106,5 @@ export type ImageZoomUseGesturesProps = Pick<ImageZoomLayoutState, 'center'> &
     | 'onPinchEnd'
     | 'onPanStart'
     | 'onPanEnd'
+    | 'onTap'
   >;
